@@ -1,6 +1,7 @@
 import backend.Database;
-import backend.repositories.QuestionRepo;
-import backend.services.QuestionService;
+import backend.repositories.InventoryRepo;
+import backend.repositories.OrderRepo;
+import backend.services.InventoryService;
 import ui.Gui;
 import ui.UIController;
 
@@ -17,24 +18,26 @@ Backend
  */
 public class App {
     public static void run() throws SQLException {
-        String url = "jdbc:sqlite:db";
-        try (
-                Database db = new Database(url);
-        ) {
-            // database
+        String url = "jdbc:sqlite:manager.db";
+
+        try (Database db = new Database(url)) {
+
             db.connect();
             Connection conn = db.getConnection();
 
+            conn.createStatement().execute("PRAGMA foreign_keys = ON;");
+
             // Repositories
-            QuestionRepo questionRepo = new QuestionRepo(conn);
+            InventoryRepo inventoryRepo = new InventoryRepo(conn);
+            OrderRepo orderRepo = new OrderRepo(conn);
 
             // Services
-            QuestionService questionService = new QuestionService(questionRepo);
+            InventoryService inventoryService = new InventoryService(inventoryRepo);
 
             // GUI
             Gui gui = new Gui();
             gui.start();
-            UIController ui = new UIController(gui, questionService);
+            UIController ui = new UIController(gui, inventoryService);
             ui.showMainMenu();
 
         } catch (IOException e) {

@@ -1,5 +1,7 @@
 package backend.repositories;
+
 import models.Inventory;
+import models.Question;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,8 +20,8 @@ public class InventoryRepo {
 
         String sql = "SELECT * FROM Inventory";
 
-        try (PreparedStatement sql = conn.prepareStatement(sql);
-             ResultSet rs = sql.executeQuery()) {
+        try (PreparedStatement sql1 = conn.prepareStatement(sql);
+             ResultSet rs = sql1.executeQuery()) {
 
             while (rs.next()) {
                 items.add(new Inventory(
@@ -34,7 +36,11 @@ public class InventoryRepo {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return items;
+    }
+
+    public List<Question> getQuestions() {
+        List<Question> questions = new ArrayList<>();
+        return questions;
     }
 }
