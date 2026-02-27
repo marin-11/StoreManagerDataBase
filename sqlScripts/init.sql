@@ -1,3 +1,10 @@
+--CREATE TABLE inventory(
+--    item_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+--    item_name TEXT NULL,
+--
+--
+--)
+
 CREATE TABLE question (
 	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	question_text TEXT NOT NULL
