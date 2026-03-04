@@ -14,15 +14,15 @@ public class OrderRepo {
 
     public void createOrder(int itemId, int userId, int amount) {
         String insertOrder = """
-            INSERT INTO Orders (item_id, user_id, amount_ordered, date_ordered)
-            VALUES (?, ?, ?, date('now'))
-        """;
+                    INSERT INTO orders (item_id, user_id, amount_ordered, date_ordered)
+                    VALUES (?, ?, ?, date('now'))
+                """;
 
         String updateStock = """
-            UPDATE Inventory
-            SET item_stock = item_stock - ?
-            WHERE item_id = ?
-        """;
+                    UPDATE inventory
+                    SET item_stock = item_stock - ?
+                    WHERE item_id = ?
+                """;
 
         try {
             conn.setAutoCommit(false);
@@ -39,11 +39,10 @@ public class OrderRepo {
                 stockStmt.setInt(2, itemId);
                 stockStmt.executeUpdate();
             }
-
             conn.commit();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 }
+

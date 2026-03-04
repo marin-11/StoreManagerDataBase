@@ -1,11 +1,12 @@
 package ui.windows;
 
+import backend.services.InventoryService;
 import com.googlecode.lanterna.gui2.*;
 import ui.UIController;
 
 public class InventoryWindow extends BasicWindow {
 
-    public InventoryWindow(UIController controller) {
+    public InventoryWindow(UIController controller, InventoryService inventoryService) {
         super("Inventory");
 
         Panel panel = new Panel();

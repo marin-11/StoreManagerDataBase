@@ -1,44 +1,42 @@
 package ui;
 
-import backend.repositories.InventoryRepo;
 import backend.services.InventoryService;
-import com.googlecode.lanterna.gui2.Window;
-import ui.windows.MainWindow;
-import ui.windows.InventoryWindow;
-import ui.windows.CreateOrderWindow;
-import ui.windows.MainWindow;
+import backend.services.OrderService;
+import ui.windows.*;
 
-/*
-Handles navigation
- */
+import java.io.IOException;
+
 public class UIController {
 
     private final Gui gui;
-    private InventoryRepo inventoryRepo = null;
+    private final InventoryService inventoryService;
+    private final OrderService orderService;
 
-    public UIController(Gui gui, InventoryService inventoryService) {
+    public UIController(Gui gui, InventoryService inventoryService, OrderService orderService) {
         this.gui = gui;
-        this.inventoryRepo = inventoryRepo;
+        this.inventoryService = inventoryService;
+        this.orderService = orderService;
     }
 
     public void showMainMenu() {
         gui.show(new MainWindow(this));
     }
 
-    public void showAllInventoryPage() {
-        gui.show(new CreateOrderWindow(this));
-    }
-
     public void showInventoryPage() {
-        gui.show(new InventoryWindow(this));
+        gui.show(new InventoryWindow(this, inventoryService));
     }
 
     public void showCreateOrderPage() {
-        gui.show(new CreateOrderWindow(this));
+        gui.show(new CreateOrderWindow(this, orderService));
     }
 
-    public void closeWindow(Window window) {
-        window.close();
+    public void switchWindow(CreateOrderWindow current, MainWindow next) {
+        try {
+            gui.close(current);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        gui.show(next);
     }
 
     public void closeApp() {

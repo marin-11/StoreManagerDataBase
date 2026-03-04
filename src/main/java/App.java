@@ -4,7 +4,7 @@ import backend.repositories.OrderRepo;
 import backend.services.InventoryService;
 import ui.Gui;
 import ui.UIController;
-
+import backend.services.OrderService;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -33,11 +33,12 @@ public class App {
 
             // Services
             InventoryService inventoryService = new InventoryService(inventoryRepo);
+            OrderService orderService = new OrderService(orderRepo);
 
             // GUI
             Gui gui = new Gui();
             gui.start();
-            UIController ui = new UIController(gui, inventoryService);
+            UIController ui = new UIController(gui, inventoryService, orderService);
             ui.showMainMenu();
 
         } catch (IOException e) {

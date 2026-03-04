@@ -1,7 +1,6 @@
 package backend.repositories;
 
 import models.Inventory;
-import models.Question;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,10 +36,5 @@ public class InventoryRepo {
             throw new RuntimeException(e);
         }
         return items;
-    }
-
-    public List<Question> getQuestions() {
-        List<Question> questions = new ArrayList<>();
-        return questions;
     }
 }
