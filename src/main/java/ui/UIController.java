@@ -3,6 +3,8 @@ package ui;
 import backend.services.InventoryService;
 import backend.services.OrderService;
 import ui.windows.*;
+import com.googlecode.lanterna.gui2.Window;
+
 
 import java.io.IOException;
 
@@ -30,12 +32,21 @@ public class UIController {
         gui.show(new CreateOrderWindow(this, orderService));
     }
 
-    public void switchWindow(CreateOrderWindow current, MainWindow next) {
-        try {
-            gui.close(current);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void showDeleteOrderPage() {
+        gui.show(new DeleteOrderWindow(this, orderService));
+    }
+
+//    public void switchWindow(CreateOrderWindow current, MainWindow next) {
+//        try {
+//            gui.close(current);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        gui.show(next);
+//    }
+
+    public void switchWindow(Window current, Window next) throws IOException {
+        gui.close(current);
         gui.show(next);
     }
 

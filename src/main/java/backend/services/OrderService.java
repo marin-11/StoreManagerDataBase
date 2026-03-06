@@ -13,4 +13,8 @@ public class OrderService {
     public void createOrder(int itemId, int userId, int amount) {
         repo.createOrder(itemId, userId, amount);
     }
+
+    public void deleteOrder(int orderId) {
+        repo.deleteOrder(orderId);
+    }
 }

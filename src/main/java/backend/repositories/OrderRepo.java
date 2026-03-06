@@ -20,7 +20,7 @@ public class OrderRepo {
 
         String updateStock = """
                     UPDATE inventory
-                    SET item_stock = item_stock - ?
+                    SET current_stock = current_stock - ?
                     WHERE item_id = ?
                 """;
 
@@ -40,6 +40,19 @@ public class OrderRepo {
                 stockStmt.executeUpdate();
             }
             conn.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void deleteOrder(int orderId) {
+
+        String sql = """
+        DELETE FROM orders WHERE order_id = ?
+    """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, orderId);
+            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

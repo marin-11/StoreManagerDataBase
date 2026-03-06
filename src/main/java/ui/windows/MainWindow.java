@@ -16,6 +16,10 @@ public class MainWindow extends BasicWindow {
             this.close();
         }));
 
+        panel.addComponent(new Button("Cancel Order",
+                controller::showDeleteOrderPage
+        ));
+
         panel.addComponent(new Button("Exit", controller::closeApp));
 
         setComponent(panel);

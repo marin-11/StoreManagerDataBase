@@ -3,6 +3,8 @@ import backend.services.OrderService;
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import ui.UIController;
+
+import java.io.IOException;
 import java.util.List;
 import java.sql.*;
 
@@ -77,7 +79,13 @@ public class CreateOrderWindow extends BasicWindow {
         });
 
         Button back = new Button("Back", () ->
-                ui.switchWindow(this, new MainWindow(ui))
+        {
+            try {
+                ui.switchWindow(this, new MainWindow(ui));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         );
 
         panel.addComponent(itemLabel);

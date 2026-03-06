@@ -18,7 +18,7 @@ Backend
  */
 public class App {
     public static void run() throws SQLException {
-        String url = "jdbc:sqlite:manager.db";
+        String url = "jdbc:sqlite:/Users/ethanmarin/IdeaProjects/StoreManagerDataBase/manager.db";
 
         try (Database db = new Database(url)) {
 
