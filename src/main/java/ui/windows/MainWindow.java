@@ -16,6 +16,11 @@ public class MainWindow extends BasicWindow {
             this.close();
         }));
 
+        panel.addComponent(new Button("Create Order", () -> {
+            controller.showCreateOrderPage();
+            this.close();
+        }));
+
         panel.addComponent(new Button("Cancel Order",
                 controller::showDeleteOrderPage
         ));

@@ -17,7 +17,7 @@ public class InventoryRepo {
     public List<Inventory> getAllItems() {
         List<Inventory> items = new ArrayList<>();
 
-        String sql = "SELECT * FROM Inventory";
+        String sql = "SELECT * FROM inventory";
 
         try (PreparedStatement sql1 = conn.prepareStatement(sql);
              ResultSet rs = sql1.executeQuery()) {
@@ -36,5 +36,28 @@ public class InventoryRepo {
             throw new RuntimeException(e);
         }
         return items;
+    }
+
+    public void updateItem(int itemId, String name, double price, int stock, double discount) {
+
+        String sql = """
+                    UPDATE inventory
+                    SET item_name = ?, item_price = ?, item_stock = ?, discount = ?
+                    WHERE item_id = ?
+                """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, name);
+            stmt.setDouble(2, price);
+            stmt.setInt(3, stock);
+            stmt.setDouble(4, discount);
+            stmt.setInt(5, itemId);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

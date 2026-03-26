@@ -16,4 +16,17 @@ public class InventoryService {
     public List<Inventory> getAllInventory() {
         return repo.getAllItems();
     }
+
+    public void updateItem(int itemId, String name, double price, int stock, double discount) {
+
+        if (name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+
+        if (price < 0 || stock < 0) {
+            throw new IllegalArgumentException("Price/Stock must be positive");
+        }
+
+        repo.updateItem(itemId, name, price, stock, discount);
+    }
 }

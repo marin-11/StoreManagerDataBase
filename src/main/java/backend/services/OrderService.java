@@ -17,4 +17,9 @@ public class OrderService {
     public void deleteOrder(int orderId) {
         repo.deleteOrder(orderId);
     }
+
+    public OrderService getOrderService(){
+        return getOrderService();
+    }
+
 }

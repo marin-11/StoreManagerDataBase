@@ -36,18 +36,13 @@ public class UIController {
         gui.show(new DeleteOrderWindow(this, orderService));
     }
 
-//    public void switchWindow(CreateOrderWindow current, MainWindow next) {
-//        try {
-//            gui.close(current);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        gui.show(next);
-//    }
-
     public void switchWindow(Window current, Window next) throws IOException {
         gui.close(current);
         gui.show(next);
+    }
+
+    public OrderService getOrderService() {
+        return orderService;
     }
 
     public void closeApp() {
